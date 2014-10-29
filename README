@@ -1,0 +1,31 @@
+Author: Andrew Schein (setjmp@google.com)
+
+jmp.sh is a bash 4.x library that enables relative bookmarking of file system
+directories including tab completion.  It is not compatible for bash 3.x users
+(Sorry Mac users!) because it relies on dictionary data structures only
+available in bash 4 and higher. Mac users may be able to upgrade to a
+non-default version of bash.
+
+The critical assumption that the library makes is that the root of the directory
+strucutre that you want to bookmark has an identifying name.  For example, you
+may have a set of directories
+
+/long_path/foo1/${JMP_ROOT_HINT}/...
+/long_path/foo2/${JMP_ROOT_HINT}/...
+
+JMP_ROOT_HINT is the variable you will use to determine the directory root for
+relative bookmarking.
+
+To use the library, put the following in your .bashrc:
+
+source ${PATH_TO_LIBRARY}/jmp.sh
+
+export JMP_ROOT_HINT=bar # identify the root of the directory.
+
+setjmp label1 path1
+setjmp label2 path2
+...
+
+where label1 is a short bookmark label and path 1 is the path relative to
+$JMP_ROOT_HINT.  You may omit leading "./" from the path1 and path2 if you want.
+
