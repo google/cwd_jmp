@@ -17,15 +17,16 @@
 declare -A JMP_BOOKMARKS
 
 _jmp() {
+  #echo "_jmp $1 $@ 2: $2"
   # function to perform bookmark completion
-  compreply=( ${!JMP_BOOKMARKS[@]} )  #default includes all
-  if [ $# -gt  1 ] ; then
-    compreply=(`echo ${!JMP_BOOKMARKS[@]} | tr ' ' '\n' | grep "^$2" | tr '\n' ' '`)
+  COMPREPLY=( ${!JMP_BOOKMARKS[@]} )  #default includes all
+  if [ $# -gt  0 ] ; then
+    COMPREPLY=(`echo ${!JMP_BOOKMARKS[@]} | tr ' ' '\n' | grep "^$2" | tr '\n' ' '`)
   fi
 }
 
-complete -f _jmp jmp # jmp is really a forward reference
-complete -f _jmp j   # as is j
+complete -F _jmp jmp # jmp is really a forward reference
+complete -F _jmp j   # as is j
 
 setjmp () {
   #setjmp bookmark_label relative_path
@@ -46,7 +47,7 @@ jmp () {
     return 1
   fi
   if [ "$#" !=  1 ] ; then
-    echo 1>&2 "$0 requires 1 argument"
+    echo 1>&2 "jmp requires 1 argument"
     return 1
   fi
   local dir=`pwd`
