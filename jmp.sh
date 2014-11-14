@@ -19,6 +19,8 @@
 
 #Disclaimer:  This is not an official Google product.
 
+#See README, for instructions
+
 declare -A JMP_BOOKMARKS
 
 _jmp() {
