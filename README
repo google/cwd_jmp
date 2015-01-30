@@ -1,4 +1,6 @@
 Author: Andrew Schein (setjmp@google.com)
+As a matter of policy, I am required to inform the user that this is not an
+official Google product.
 
 jmp.sh is a bash 4.x library that enables relative bookmarking of file system
 directories including tab completion.  It is not compatible for bash 3.x users
