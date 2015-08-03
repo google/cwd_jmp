@@ -101,16 +101,9 @@ alias j='jmp'
 # at first, let's assume we are at root
 jfind () {
   root=`_setjmp_getroot`
-  echo "root is: $root"
-  (for dir in "${JMP_BOOKMARKS[@]}" ; do echo $dir; done;) | \
-    parallel 'echo {} ; ([ ! -e {} ] || find {} -maxdepth 1 -type f)'
+  (for dir in "${JMP_BOOKMARKS[@]}" ; do echo ${root}/$dir; done;) | \
+    parallel 'echo {} ; ([ ! -e {} ] || find {} -maxdepth 1 -type f)' | \
+    sed "s~^${root}/~~g"
 }
 
-# tool to enumerate files in the blaze-bin output directories
-# corresponding to JMP_BOOKMARKS.  We asume PWD is root
-bfind () {
-  root=`_setjmp_getroot`
-  (for dir in "${JMP_BOOKMARKS[@]}" ; do echo $dir; done;) | \
-    parallel '([ ! -e blaze-bin/{} ] || find blaze-bin/{} -maxdepth 1 -type f)'
-}
 
