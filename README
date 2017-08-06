@@ -9,7 +9,7 @@ available in bash 4 and higher. Mac users may be able to upgrade to a
 non-default version of bash.
 
 The critical assumption that the library makes is that the root of the directory
-strucutre that you want to bookmark has an identifying name.  For example, you
+structure that you want to bookmark has an identifying name.  For example, you
 may have a set of directories
 
 /long_path/foo1/${JMP_ROOT_HINT}/...
